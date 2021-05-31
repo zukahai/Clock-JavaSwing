@@ -26,8 +26,7 @@ public class Clock extends JFrame{
 	}
 	
 	public Container init() {
-		Container cn = this.getContentPane();
-		
+		Container cn = this.getContentPane(); 
 //		this.setVisible(true);
 		this.setSize(500, 500);
 //		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -38,9 +37,12 @@ public class Clock extends JFrame{
 	}
 	
 	public void paint(Graphics g) {
-		g.drawOval(100, 100, 300, 300);
-		g.drawOval(101, 101, 298, 298);
-		System.out.println("Hello");
+		setBackground(Color.red); 
+		for (int i = 0; i <= 10; i++) {
+			g.drawOval(100 + i, 100 + i, 300 - 2 * i, 300 - 2 * i);
+		}
+		g.drawLine(0, 0, 100, 100);
+//		System.out.println("Hello");
 	}
 	
 	public static void main(String[] args) {
