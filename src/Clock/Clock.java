@@ -41,7 +41,25 @@ public class Clock extends JFrame{
 		for (int i = 0; i <= 10; i++) {
 			g.drawOval(100 + i, 100 + i, 300 - 2 * i, 300 - 2 * i);
 		}
-		g.drawLine(0, 0, 100, 100);
+		for (int i = 0; i <= 11; i++) {
+			for (float j = (float) - 0.3; j <= 0.3; j += 0.1) {
+				int x1, y1, x2, y2;
+				x1 = (int) (140 * Math.sin(Math.toRadians(i * 30 + j)));
+				y1 = (int) (140 * Math.cos(Math.toRadians(i * 30 + j)));
+				x2 = (int) (120 * Math.sin(Math.toRadians(i * 30 + j)));
+				y2 = (int) (120 * Math.cos(Math.toRadians(i * 30 + j)));
+				g.drawLine(x1 + 250, y1 + 250, x2 + 250, y2 + 250);
+			}
+		}
+		for (int i = 0; i <= 59; i++) {
+			int x1, y1, x2, y2;
+			x1 = (int) (140 * Math.sin(Math.toRadians(i * 6)));
+			y1 = (int) (140 * Math.cos(Math.toRadians(i * 6)));
+			x2 = (int) (130 * Math.sin(Math.toRadians(i * 6)));
+			y2 = (int) (130 * Math.cos(Math.toRadians(i * 6)));
+			g.drawLine(x1 + 250, y1 + 250, x2 + 250, y2 + 250);
+		}
+		g.fillOval(245, 245, 10, 10);
 //		System.out.println("Hello");
 	}
 	
