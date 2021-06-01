@@ -45,7 +45,8 @@ public class Clock extends JFrame{
 	}
 	
 	public void paint(Graphics g) {
-		g.clearRect(0, 0, 600, 600);
+		g.clearRect(0, 0, 500, 400);
+		setBackground(Color.white);
 		g.setFont(new Font("UTM Nokia", 1, 20));
 		for (int i = 0; i <= 10; i++) {
 			g.drawOval(100 + i, 100 + i, 300 - 2 * i, 300 - 2 * i);
