@@ -20,6 +20,7 @@ import javax.swing.Timer;
 
 public class Clock extends JFrame{
 	Container cn;
+	Timer timer;
 	public Clock() {
 		super("Clock");
 		cn = init();
@@ -33,11 +34,19 @@ public class Clock extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.show();
+		
+		timer = new Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				repaint();
+			}
+		});
+		
 		return cn;
 	}
 	
 	public void paint(Graphics g) {
-		setBackground(Color.red); 
+		g.clearRect(0, 0, 600, 600);
+		g.setFont(new Font("UTM Nokia", 1, 30));
 		for (int i = 0; i <= 10; i++) {
 			g.drawOval(100 + i, 100 + i, 300 - 2 * i, 300 - 2 * i);
 		}
@@ -60,10 +69,38 @@ public class Clock extends JFrame{
 			g.drawLine(x1 + 250, y1 + 250, x2 + 250, y2 + 250);
 		}
 		g.fillOval(245, 245, 10, 10);
-//		System.out.println("Hello");
+//		g.drawString(getTime(), 50, 500);
+//		System.out.println(getTime());
+		
+		String s[] = getTime().split(":");
+		int t = Integer.parseInt(s[0]) * 3600 + Integer.parseInt(s[1]) * 60 + Integer.parseInt(s[2]);
+		t %= 43200;
+		float ss = t % 60;
+		int x1, y1, x2, y2;
+		x1 = (int) + (120 * Math.sin(Math.toRadians(ss * 6)));
+		y1 = (int) - (120 * Math.cos(Math.toRadians(ss * 6)));
+		g.drawLine(250, 250, x1 + 250, y1 + 250);
+		
+		ss = (float) ((t / 60) % 60 + (t % 60) / 60.0);
+		x1 = (int) + (100 * Math.sin(Math.toRadians(ss * 6)));
+		y1 = (int) - (100 * Math.cos(Math.toRadians(ss * 6)));
+		g.drawLine(250, 250, x1 + 250, y1 + 250);
+		
+		ss = (float) (t / 3600.0);
+		x1 = (int) + (80 * Math.sin(Math.toRadians(ss * 30)));
+		y1 = (int) - (80 * Math.cos(Math.toRadians(ss * 30)));
+		g.drawLine(250, 250, x1 + 250, y1 + 250);
+		
+//		System.out.println(ss);
+	}
+	
+	public String getTime() {
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss:SS");
+		return sdf.format(cal.getTime());
 	}
 	
 	public static void main(String[] args) {
-		new Clock();
+		new Clock().timer.start();
 	}
 }
