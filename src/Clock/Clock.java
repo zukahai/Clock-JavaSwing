@@ -20,7 +20,6 @@ import javax.swing.Timer;
 
 public class Clock extends JFrame{
 	Container cn;
-	public Timer timer;
 	public Clock() {
 		super("Clock - HaiZuka");
 		cn = init();
@@ -34,12 +33,6 @@ public class Clock extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.show();
-		
-		timer = new Timer(100, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				repaint();
-			}
-		});
 		
 		return cn;
 	}
@@ -106,6 +99,18 @@ public class Clock extends JFrame{
 		g.drawLine(250, 250, x1 + 250, y1 + 250);
 	}
 	
+	public void run() {
+		while (true) {
+			try {
+				Thread.sleep(150);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			repaint();
+		}
+	}
+	
 	public String getTime() {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss:SS");
@@ -113,6 +118,6 @@ public class Clock extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		new Clock().timer.start();
+		new Clock().run();
 	}
 }
